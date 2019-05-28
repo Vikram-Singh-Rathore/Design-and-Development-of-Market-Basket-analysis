@@ -20,40 +20,19 @@ orderDf = pd.read_csv("in_orders.csv")
 depDf = pd.read_csv("in_departments.csv")
 aisleDf = pd.read_csv("in_aisles.csv")
 productDf = pd.read_csv("in_products.csv")
-
-
-# In[3]:
-
-
 trainDf.head()
-
-
-# In[4]:
 
 
 orderDf.head()
 
 
-# In[5]:
-
-
 depDf.head()
 
 
-# In[6]:
-
-
-aisleDf.head()
-
-
-# In[7]:
+aisleDf.head(
 
 
 productDf.head()
-
-
-# In[8]:
-
 
 # Data Preprocessing
 dataset = pd.read_csv('product_transaction.csv', header = None)
@@ -61,68 +40,14 @@ transactions = []
 for i in range(0, 7543):
     transactions.append([str(dataset.values[i,j]) for j in range(0, 20)])
 
-
-# In[9]:
-
-
 len(transactions)
-
-
-# In[10]:
-
 
 dataset.head()
 
-
-# In[11]:
-
-
 #transactions[:5]
-
-
-# In[12]:
-
-
 depDf.head(10)
 
 
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[13]:
 
 
 #load data into pandas dataframe..
@@ -328,15 +253,14 @@ frequency_df.columns = ['CustomerID','Frequency']
 frequency_df.head()
 
 
-# In[41]:
-
+ 
 
 #calculate how much a customer spend in the each transaction...
 #                      Expenditure
 big['Total_cost'] = big['UnitPrice'] * big['Quantity']
 
 
-# In[42]:
+
 
 
 #check summed up spend of a customer with respect to latest date..
@@ -345,7 +269,7 @@ Expenditure_df=big.groupby('CustomerID',as_index=False)['Total_cost'].sum()
 Expenditure_df.columns = ['CustomerID','Expenditure']
 
 
-# In[43]:
+
 
 
 Expenditure_df.head()
@@ -357,7 +281,7 @@ Expenditure_df.head()
 Expenditure_df.head() #without index= false we dont have expenditure
 
 
-# In[45]:
+
 
 
 #Combine all together all dataframe in so we have recency, frequency and monetary values together..
@@ -389,22 +313,6 @@ big[big.CustomerID == 12346.0]
 
 
 (now - dt.date(2011,1,18)).days == 325 # to check the recency that he is coming or not to shop
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[49]:
-
 
 #bring all the quartile value("Recency","Frequency","Expenditure") in a single dataframe
 
@@ -474,7 +382,6 @@ sns.boxplot(rfe_segmentation.cluster,rfe_segmentation.Frequency)
 # race of platinum and gold customer.
 # 
 
-# In[56]:
 
 
 sns.boxplot(rfe_segmentation.cluster,rfe_segmentation.Expenditure)
@@ -482,7 +389,6 @@ sns.boxplot(rfe_segmentation.cluster,rfe_segmentation.Expenditure)
 
 # Based on customer Segmentation we found out cluster 1 is Platinum customers Cluster 2 is Gold Customers Cluster 3 is Silver Customers
 
-# In[57]:
 
 
 # Plaatanium                                                                 #.5(platanium,gold,silver)
@@ -490,15 +396,10 @@ print(len(rfe_segmentation[rfe_segmentation.cluster == 1]))
 rfe_segmentation[rfe_segmentation.cluster == 1].head()
 
 
-# In[58]:
-
 
 #gold
 print(len(rfe_segmentation[rfe_segmentation.cluster == 2]))
 rfe_segmentation[rfe_segmentation.cluster == 2].head()
-
-
-# In[59]:
 
 
 #silver
@@ -506,14 +407,7 @@ print(len(rfe_segmentation[rfe_segmentation.cluster == 0]))
 rfe_segmentation[rfe_segmentation.cluster == 0].head()
 
 
-# In[ ]:
-
-
-
-
-
-# In[60]:
-
+#
 
 #import dataset
 #trainDf = pd.read_csv("in_order_products__train.csv")
@@ -580,20 +474,6 @@ productDf.shape
 
 
 # here, only 49,688 products are listed,which are ready to sell.......
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[69]:
 
 
 #get distribution of number of order in percent
@@ -693,7 +573,6 @@ display(topProdFrame.loc[:,["product_name","product_id"]].head())
 #productDf["product_name"].value_counts().plot(title="Total Number of Items Sold by Date").set(xlabel="Date", ylabel="Total Number of Items Sold")
 
 
-# In[80]:
 
 
 #big.sort_index(inplace=True)
@@ -702,14 +581,13 @@ display(topProdFrame.loc[:,["product_name","product_id"]].head())
 #big["UnitPrice"].plot(kind='pie')
 
 
-# In[81]:
+
 
 
 #Now
 #orderDf['order_id'].plot()
 
 
-# In[82]:
 
 
 # create a pie chart, by %aisle(product row)
@@ -724,15 +602,12 @@ aisleDf.aisle.value_counts()[:10].plot(kind="pie", title="DIfferent Aisle for Sh
 orderDf.head()
 
 
-# In[ ]:
 
 
 
 
 
 # no of ordrs in a week ...in givedd Daata
-
-# In[84]:
 
 
 grouped = orderDf.groupby("order_id")["order_dow"].aggregate("sum").reset_index(name='order_dow')
@@ -749,13 +624,8 @@ plt.show()
 #print("shows a graph")
 
 
-# In[85]:
-
-
 print('Sunday and Monday is the busiest day of the week with the highest sales while Thursday is the quietest day with the lowest sales . This is an interesting insight, the owner of the Bakery should launch some promotion activities to boost up sales in the middle of the week when sales are slowest.')
 
-
-# In[87]:
 
 
 grouped1=orderDf.groupby('order_id')['order_hour_of_day'].aggregate("sum").reset_index()
@@ -769,14 +639,6 @@ plt.xlabel('Order in a day(In terms of Hours)', fontsize=13)
 
 plt.show()#.4(hourly graph)
 
-
-# In[ ]:
-
-
-
-
-
-# In[88]:
 
 
 # no of unique custmer in the  whole dataset
@@ -801,20 +663,6 @@ from mlxtend.frequent_patterns import apriori
 from mlxtend.frequent_patterns import association_rules
 
 
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[91]:
-
 
 # now we merge the train and order dataset to get the real product selling dataset
 
@@ -837,19 +685,12 @@ trainDf.head()
 #For counting each product, we can assign reordered column as 1
 
 
-# In[95]:
 
 
 trainDf['reordered'] = 1
 
 
-# In[96]:
-
-
 productCountDf = trainDf.groupby("product_id",as_index = False)["order_id"].count()
-
-
-# In[97]:
 
 
 newproductCountDf=productCountDf.merge(productDf, left_on='product_id', right_on='product_id', how='inner') 
@@ -857,13 +698,8 @@ newDf = newproductCountDf[['product_id','product_name']]
 newDf.head()
 
 
-# In[98]:
-
-
 newproductCountDf.head()
 
-
-# In[99]:
 
 
 len(productId)
@@ -881,15 +717,8 @@ for i in range(0,99):
     df = df.append(stDf,ignore_index = False)
 
 
-# In[101]:
-
 
 df=df.reset_index()
-
-
-# In[ ]:
-
-
 
 
 
@@ -912,21 +741,17 @@ def encode_units(x):
         return 1
 
 
-# In[ ]:
+
 
 
 basket_sets = basket.applymap(encode_units)
 
 
-# In[ ]:
+
 
 
 #basket_sets.head()
 basket_sets.head()
-
-
-# In[ ]:
-
 
 basket_sets.size
 
@@ -954,22 +779,6 @@ rules = association_rules(requent_itemsets, metric="lift", min_threshold=1)
 rules.head()
 
 
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
 
 
 # # information  we will provide to client
@@ -982,51 +791,12 @@ orderDf.shape                               #.1
 
 # # you have 34,21,083 no. of transaction till now!!!!!
 
-# In[ ]:
-
-
-
-
-
-# In[158]:
-
 
 len(set(orderDf.user_id))                 #.2
 
 
-# 
-
-# In[ ]:
 
 
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[160]:
 
 
 # sales groupby weekday
@@ -1034,68 +804,15 @@ len(set(orderDf.user_id))                 #.2
 #bread_groupby_weekday
 
 
-# 
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# 
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
 # top selling products
 # 
 
-# In[161]:
+
 
 
 topProdFrame.head(int(input("enter the no.for top selling product list = "))) #.6
 
 
-# In[ ]:
-
-
-
-
-
-# In[162]:
 
 
 # Training Apriori on the dataset
@@ -1106,15 +823,10 @@ rules = apriori(transactions, min_support = 0.003, min_confidence = 0.2, min_lif
 print(type(rules))
 results = list(rules)
 
-
-# In[163]:
-
-
 # Total number of rules generated
 print(len(results))
 
 
-# In[164]:
 
 
 cnt=0
@@ -1130,26 +842,9 @@ for item in results:
     if cnt >2:
         break;
 
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[165]:
-
-
 qq=pd.DataFrame()
 
 
-# In[166]:
 
 
 product1=[]
@@ -1173,14 +868,6 @@ for item in results:
         break;
 
 
-# In[ ]:
-
-
-
-
-
-# In[167]:
-
 
 qq['product1']=product1
 qq['product2']=product2
@@ -1188,26 +875,6 @@ qq['Support']=Support1
 qq['Confidence']=Confidence
 qq['Lift']=Lift1
 
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[168]:
 
 
 qq.sort_values(['Lift'],ascending=False,inplace=True)
@@ -1226,19 +893,6 @@ qq=qq.head(int(input("enter the no.. for top related product")))
 #priorDf["product_name"].resample("M").count().plot(figsize=(12,5), grid=True, title="Total Number by Items Sold by Month").set(xlabel="Date", ylabel="Total Number of Items Sold")
 
 
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
 
 
 
